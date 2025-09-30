@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import express, { Request, Response } from "express";
 import cors from "cors";
+import compression from "compression";
 import cookieParser from "cookie-parser";
 import { router } from "./app/routes";
 import { globalErrorHandler } from "./app/middlewares/globalErrorHandler";
@@ -16,6 +16,7 @@ app.use(cors({
     origin: ['http://localhost:3000', envVars.FRONTEND_URL],
     credentials: true
 }));
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -25,7 +26,7 @@ app.use(expressSession({
     saveUninitialized: false
 }));
 
-app.use("/api/v1", router);
+app.use("/api", router);
 
 app.get("/", (req: Request, res: Response) => {
     res.status(200).send({
