@@ -5,10 +5,10 @@ import { IBlog } from "./blog.interface";
 
 
 const blogSchema = new Schema<IBlog>({
-    title: { type: String, required: true },
+    title: { type: String, required: true, unique: true },
     thumbnail: { type: String, required: true, unique: true },
     content: { type: String, required: true },
-    tags: { type: [String] },
+    tags: { type: [String], required: true },
     views: { type: Number, default: 0 },
 }, {
     timestamps: true,

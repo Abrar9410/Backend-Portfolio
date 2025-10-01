@@ -26,7 +26,11 @@ import { JwtPayload } from "jsonwebtoken";
 
 const updateUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
-    const payload = req.body;
+    const payload = {...req.body};
+    if (req.file?.path) {
+        payload.picture = req.file.path;
+    };
+
     const updatedUser = await UserServices.updateUserService(userId, payload);
 
     sendResponse(res, {

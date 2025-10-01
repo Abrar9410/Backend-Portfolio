@@ -1,3 +1,4 @@
+import { deleteImageFromCLoudinary } from "../../config/cloudinary.config";
 import AppError from "../../errorHelpers/AppError";
 import { IUser } from "./user.interface";
 import { Users } from "./user.model";
@@ -39,7 +40,11 @@ const updateUserService = async (userId: string, payload: Partial<IUser>) => {
         throw new AppError(httpStatus.NOT_ACCEPTABLE, "Password Can Not be Updated on this Route! If You Want to Change Your Password then Go to 'auth/change-password' Route");
     };
 
-    const updatedUser = await Users.findByIdAndUpdate(userId, payload, {new: true, runValidators: true});
+    const updatedUser = await Users.findByIdAndUpdate(userId, payload, { new: true, runValidators: true });
+
+    if (payload.picture && user.picture) {
+        await deleteImageFromCLoudinary(user.picture);
+    };
 
     return updatedUser;
 };
@@ -67,7 +72,7 @@ const updateUserService = async (userId: string, payload: Partial<IUser>) => {
 
 const getMeService = async (userId: string) => {
     const user = await Users.findById(userId);
-    
+
     return {
         data: user
     };
