@@ -23,10 +23,10 @@ const addProject = catchAsync( async (req: Request, res: Response, next: NextFun
     });
 });
 
-const getAllProjects = catchAsync( async (req: Request, res: Response, next: NextFunction) => {
+const getProjects = catchAsync( async (req: Request, res: Response, next: NextFunction) => {
     const query = req.query;
 
-    const result = await ProjectServices.getAllProjects(query as Record<string, string>);
+    const result = await ProjectServices.getProjects(query as Record<string, string>);
 
     sendResponse(res, {
         success: true,
@@ -84,7 +84,7 @@ const deleteProject = catchAsync( async (req: Request, res: Response, next: Next
 
 export const ProjectControllers = {
     addProject,
-    getAllProjects,
+    getProjects,
     getSingleProject,
     updateProject,
     deleteProject

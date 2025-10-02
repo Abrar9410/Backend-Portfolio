@@ -13,7 +13,7 @@ const addProject = async (payload: Partial<IProject>) => {
     return newProject;
 };
 
-const getAllProjects = async (query: Record<string, string>) => {
+const getProjects = async (query: Record<string, string>) => {
     const queryBuilder = new QueryBuilder(Projects.find(), query);
     const projectsData = queryBuilder
         .filter()
@@ -78,7 +78,7 @@ const deleteProject = async (projectId: string) => {
 
 export const ProjectServices = {
     addProject,
-    getAllProjects,
+    getProjects,
     getSingleProject,
     updateProject,
     deleteProject
