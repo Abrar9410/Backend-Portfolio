@@ -9,9 +9,9 @@ import { ProjectControllers } from "./project.controller";
 const router = Router();
 
 
-router.post("/create-project", checkAuth(), multerUpload.single("file"), validateMutationRequest(createProjectZodSchema), ProjectControllers.addProject);
+router.post("/add-project", checkAuth(), multerUpload.single("file"), validateMutationRequest(createProjectZodSchema), ProjectControllers.addProject);
 router.get("/", ProjectControllers.getProjects);
-router.get("/:blogId", ProjectControllers.getSingleProject);
+router.get("/:projectId", ProjectControllers.getSingleProject);
 router.patch("/update-project/:projectId", checkAuth(), multerUpload.single("file"), validateMutationRequest(updateProjectZodSchema), ProjectControllers.updateProject);
 router.delete("/delete-project/:projectId", checkAuth(), ProjectControllers.deleteProject);
 
