@@ -30,7 +30,7 @@ const getBlogs = async (query: Record<string, string>) => {
         return {
             data,
             meta
-        }
+        };
 };
 
 const getSingleBlog = async (blogId: string) => {
