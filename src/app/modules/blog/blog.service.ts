@@ -34,7 +34,7 @@ const getBlogs = async (query: Record<string, string>) => {
 };
 
 const getSingleBlog = async (blogId: string) => {
-    const blog = await Blogs.findById(blogId);
+    const blog = await Blogs.findByIdAndUpdate(blogId, { $inc: { views: 1 } }, { new: true, runValidators: true });
 
     return blog;
 };
