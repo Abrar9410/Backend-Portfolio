@@ -11,6 +11,7 @@ export interface IProject {
     technologies: string[];
     challenges?: string;
     future_plans?: string;
+    featured: boolean;
     github_repo: string;
     live_link: string;
 };

@@ -12,6 +12,7 @@ const projectSchema = new Schema<IProject>({
     technologies: { type: [String], required: true },
     challenges: { type: String },
     future_plans: { type: String },
+    featured: { type: Boolean, default: false},
     github_repo: { type: String, required: true },
     live_link: { type: String, required: true }
 }, {

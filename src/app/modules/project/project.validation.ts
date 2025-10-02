@@ -17,6 +17,9 @@ export const createProjectZodSchema = z.object({
     future_plans: z
         .string("Future Plans must be string!")
         .optional(),
+    featured: z
+        .boolean("Featured property must be a boolean value")
+        .optional(),
     github_repo: z
         .string("Project GitHub Repo link must be string!"),
     live_link: z
@@ -42,6 +45,9 @@ export const updateProjectZodSchema = z.object({
         .optional(),
     future_plans: z
         .string("Future Plans must be string!")
+        .optional(),
+    featured: z
+        .boolean("Featured property must be a boolean value")
         .optional(),
     github_repo: z
         .string("Project GitHub Repo link must be string!")
