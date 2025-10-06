@@ -7,7 +7,7 @@ import AppError from "../errorHelpers/AppError";
 import httpStatus from "http-status-codes";
 
 export const createUserTokens = (user: Partial<IUser>) => {
-    const jwtPayload = { userId: user._id, name: user.name, email: user.email };
+    const jwtPayload = { userId: user._id, name: user.name, email: user.email, picture: user.picture };
 
     const token = generateToken(jwtPayload, envVars.JWT_SECRET, envVars.JWT_EXPIRESIN);
 
@@ -32,6 +32,7 @@ export const createNewTokenWithRefreshToken = async (refreshToken: string) => {
         userId: user._id,
         name: user.name,
         email: user.email,
+        picture: user.picture
     };
 
     const newToken = generateToken(jwtPayload, envVars.JWT_SECRET, envVars.JWT_EXPIRESIN);

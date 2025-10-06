@@ -42,7 +42,7 @@ const updateUser = catchAsync(async (req: Request, res: Response, next: NextFunc
 });
 
 const getMe = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const decodedToken = req.user as JwtPayload
+    const decodedToken = req.user as JwtPayload;
     const result = await UserServices.getMeService(decodedToken.userId);
 
     sendResponse(res, {
