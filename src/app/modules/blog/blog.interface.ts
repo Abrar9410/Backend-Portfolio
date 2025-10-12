@@ -5,9 +5,11 @@ export interface IBlog {
     _id?: Types.ObjectId;
     title: string;
     thumbnail: string;
-    content: string;
+    overview: string;
+    contentJSON: Record<string, unknown>;
+    contentHTML: string;
     tags: string[];
     views?: number;
     createdAt?: Date
     updatedAt?: Date
-}
+};

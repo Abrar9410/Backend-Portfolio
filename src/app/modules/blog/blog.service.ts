@@ -1,36 +1,39 @@
 import { deleteImageFromCLoudinary } from "../../config/cloudinary.config";
+import { sanitizeOptions } from "../../constants";
 import AppError from "../../errorHelpers/AppError";
 import { QueryBuilder } from "../../utils/QueryBuilder";
 import { blogSearchableFields } from "./blog.constant";
 import { IBlog } from "./blog.interface";
 import { Blogs } from "./blog.model";
+import sanitizeHtml from "sanitize-html";
 
 
 
 const createBlog = async (blog: Partial<IBlog>) => {
-    const newBlog = await Blogs.create(blog);
+    const contentHTML = sanitizeHtml(blog.contentHTML as string, sanitizeOptions);
 
+    const newBlog = await Blogs.create({ ...blog, contentHTML });
     return newBlog;
 };
 
 const getBlogs = async (query: Record<string, string>) => {
     const queryBuilder = new QueryBuilder(Blogs.find(), query)
-        const blogsData = queryBuilder
-            .filter()
-            .search(blogSearchableFields)
-            .sort()
-            .fields()
-            .paginate();
-    
-        const [data, meta] = await Promise.all([
-            blogsData.build(),
-            queryBuilder.getMeta()
-        ])
-    
-        return {
-            data,
-            meta
-        };
+    const blogsData = queryBuilder
+        .filter()
+        .search(blogSearchableFields)
+        .sort()
+        .fields()
+        .paginate();
+
+    const [data, meta] = await Promise.all([
+        blogsData.build(),
+        queryBuilder.getMeta()
+    ])
+
+    return {
+        data,
+        meta
+    };
 };
 
 const getSingleBlog = async (blogId: string) => {
