@@ -40,9 +40,9 @@ export const createProjectZodSchema = z.object({
         .boolean("Featured property must be a boolean value")
         .optional(),
     github_repo: z
-        .string("Project GitHub Repo link must be string!"),
+        .url("Project GitHub Repo link is not a valid URL!"),
     live_link: z
-        .string("Project Live Link must be string!")
+        .url("Project Live Link is not a valid URL!")
 });
 
 export const updateProjectZodSchema = z.object({
@@ -90,9 +90,9 @@ export const updateProjectZodSchema = z.object({
         .boolean("Featured property must be a boolean value")
         .optional(),
     github_repo: z
-        .string("Project GitHub Repo link must be string!")
+        .url("Project GitHub Repo link is not a valid URL!")
         .optional(),
     live_link: z
-        .string("Project Live Link must be string!")
+        .url("Project Live link is not a valid URL!")
         .optional()
 });
