@@ -1,14 +1,17 @@
 import { deleteImageFromCLoudinary } from "../../config/cloudinary.config";
+import { sanitizeOptions } from "../../constants";
 import AppError from "../../errorHelpers/AppError";
 import { QueryBuilder } from "../../utils/QueryBuilder";
 import { projectSearchableFields } from "./project.constant";
 import { IProject } from "./project.interface";
 import { Projects } from "./project.model";
+import sanitizeHtml from "sanitize-html";
 
 
 
-const addProject = async (payload: Partial<IProject>) => {
-    const newProject = await Projects.create(payload);
+const addProject = async (project: Partial<IProject>) => {
+    const detailsHTML = sanitizeHtml(project.detailsHTML as string, sanitizeOptions);
+    const newProject = await Projects.create({ ...project, detailsHTML });
 
     return newProject;
 };

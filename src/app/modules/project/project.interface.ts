@@ -7,10 +7,11 @@ export interface IProject {
     title: string;
     thumbnail: string;
     overview: string;
-    description: string;
+    startDate: string;
+    endDate?: string;
+    detailsJSON: Record<string, unknown>;
+    detailsHTML: string;
     technologies: string[];
-    challenges?: string;
-    future_plans?: string;
     featured: boolean;
     github_repo: string;
     live_link: string;

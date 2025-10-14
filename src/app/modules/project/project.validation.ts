@@ -7,23 +7,42 @@ export const createProjectZodSchema = z.object({
         .min(5, "Title is too short!"),
     overview: z
         .string("Project Overview must be string!"),
-    description: z
-        .string("Project Description must be string!"),
+    detailsJSON: z
+        .object({
+            type: z.literal("doc", { error: "Invalid or Empty Content!" }),
+            content: z.array(z.any()).min(1, "Project Details cannot be empty!")
+        })
+        .refine(
+            (val) => {
+                const content = val.content;
+                return !(
+                    content.length === 1 &&
+                    content[0].type === "paragraph" &&
+                    (!content[0].content || content[0].content.length === 0)
+                );
+            },
+            { message: "Project Details cannot be empty!" }
+        )
+        .refine((val) => val && val.type === "doc", "Invalid content structure"),
+    detailsHTML: z
+        .string()
+        .min(1, "HTML content cannot be empty!"),
+    startDate: z
+        .string("Project Start-Date must be string!")
+        .min(10, "Invalid Start-Date!"),
+    endDate: z
+        .string("Project Start-Date must be string!")
+        .min(7, "Invalid End-Date!")
+        .optional(),
     technologies: z
         .array(z.string()),
-    challenges: z
-        .string("Project Challenges must be string!")
-        .optional(),        
-    future_plans: z
-        .string("Future Plans must be string!")
-        .optional(),
     featured: z
         .boolean("Featured property must be a boolean value")
         .optional(),
     github_repo: z
         .string("Project GitHub Repo link must be string!"),
     live_link: z
-        .string("Project Live Link must be string!")        
+        .string("Project Live Link must be string!")
 });
 
 export const updateProjectZodSchema = z.object({
@@ -34,17 +53,38 @@ export const updateProjectZodSchema = z.object({
     overview: z
         .string("Project Overview must be string!")
         .optional(),
-    description: z
-        .string("Project Description must be string!")
+    detailsJSON: z
+        .object({
+            type: z.literal("doc", { error: "Invalid or Empty Content!" }),
+            content: z.array(z.any()).min(1, "Project Details cannot be empty!")
+        })
+        .refine(
+            (val) => {
+                const content = val.content;
+                return !(
+                    content.length === 1 &&
+                    content[0].type === "paragraph" &&
+                    (!content[0].content || content[0].content.length === 0)
+                );
+            },
+            { message: "Project Details cannot be empty!" }
+        )
+        .refine((val) => val && val.type === "doc", "Invalid content structure")
+        .optional(),
+    detailsHTML: z
+        .string()
+        .min(1, "HTML content cannot be empty!")
+        .optional(),
+    startDate: z
+        .string("Project Start-Date must be string!")
+        .min(10, "Invalid Start-Date!")
+        .optional(),
+    endDate: z
+        .string("Project Start-Date must be string!")
+        .min(7, "Invalid End-Date!")
         .optional(),
     technologies: z
         .array(z.string())
-        .optional(),
-    challenges: z
-        .string("Project Challenges must be string!")
-        .optional(),
-    future_plans: z
-        .string("Future Plans must be string!")
         .optional(),
     featured: z
         .boolean("Featured property must be a boolean value")
