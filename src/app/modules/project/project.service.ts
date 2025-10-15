@@ -36,8 +36,8 @@ const getProjects = async (query: Record<string, string>) => {
     };
 };
 
-const getSingleProject = async (projectId: string) => {
-    const project = await Projects.findById(projectId);
+const getSingleProject = async (projectTitle: string) => {
+    const project = await Projects.findOne({ title: projectTitle });
 
     if (!project) {
         throw new AppError(404, "Project Not Found!");

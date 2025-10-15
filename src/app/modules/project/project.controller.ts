@@ -38,9 +38,9 @@ const getProjects = catchAsync( async (req: Request, res: Response, next: NextFu
 });
 
 const getSingleProject = catchAsync( async (req: Request, res: Response, next: NextFunction) => {
-    const projectId = req.params.projectId;
+    const projectTitle = req.params.projectTitle;
 
-    const result = await ProjectServices.getSingleProject(projectId);
+    const result = await ProjectServices.getSingleProject(projectTitle);
 
     sendResponse(res, {
         success: true,

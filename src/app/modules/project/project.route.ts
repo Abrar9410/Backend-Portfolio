@@ -11,7 +11,7 @@ const router = Router();
 
 router.post("/add-project", checkAuth(), multerUpload.single("file"), validateMutationRequest(createProjectZodSchema), ProjectControllers.addProject);
 router.get("/", ProjectControllers.getProjects);
-router.get("/:projectId", ProjectControllers.getSingleProject);
+router.get("/:projectTitle", ProjectControllers.getSingleProject);
 router.patch("/update-project/:projectId", checkAuth(), multerUpload.single("file"), validateMutationRequest(updateProjectZodSchema), ProjectControllers.updateProject);
 router.delete("/delete-project/:projectId", checkAuth(), ProjectControllers.deleteProject);
 
