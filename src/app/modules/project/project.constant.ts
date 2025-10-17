@@ -1,1 +1,1 @@
-export const projectSearchableFields = ["title", "overview"];
+export const projectSearchableFields = ["title", "overview", "technologies"];

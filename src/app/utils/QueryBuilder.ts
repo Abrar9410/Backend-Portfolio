@@ -67,13 +67,17 @@ export class QueryBuilder<T> {
     };
 
     async getMeta() {
-        const totalDocuments = await this.modelQuery.model.countDocuments()
+        // Use the same filter as the current query
+        const queryFilter = this.modelQuery.getFilter();
 
-        const page = Number(this.query.page) || 1
-        const limit = Number(this.query.limit) || 10
+        // Count documents using that filter
+        const totalDocuments = await this.modelQuery.model.countDocuments(queryFilter);
 
-        const totalPage = Math.ceil(totalDocuments / limit)
+        const page = Number(this.query.page) || 1;
+        const limit = Number(this.query.limit) || 10;
 
-        return { page, limit, total: totalDocuments, totalPage }
+        const totalPage = Math.ceil(totalDocuments / limit);
+
+        return { page, limit, total: totalDocuments, totalPage };
     };
 };

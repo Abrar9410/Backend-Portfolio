@@ -18,7 +18,6 @@ const createBlog = async (blog: Partial<IBlog>) => {
 
 const getBlogs = async (query: Record<string, string>) => {
     const queryBuilder = new QueryBuilder(Blogs.find(), query)
-    const blogsData = queryBuilder
         .filter()
         .search(blogSearchableFields)
         .sort()
@@ -26,14 +25,11 @@ const getBlogs = async (query: Record<string, string>) => {
         .paginate();
 
     const [data, meta] = await Promise.all([
-        blogsData.build(),
-        queryBuilder.getMeta()
-    ])
+        queryBuilder.build(),
+        queryBuilder.getMeta(),
+    ]);
 
-    return {
-        data,
-        meta
-    };
+    return { data, meta };
 };
 
 const getSingleBlog = async (blogId: string) => {

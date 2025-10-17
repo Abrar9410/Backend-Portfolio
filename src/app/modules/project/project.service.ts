@@ -17,8 +17,7 @@ const addProject = async (project: Partial<IProject>) => {
 };
 
 const getProjects = async (query: Record<string, string>) => {
-    const queryBuilder = new QueryBuilder(Projects.find(), query);
-    const projectsData = queryBuilder
+    const queryBuilder = new QueryBuilder(Projects.find(), query)
         .filter()
         .search(projectSearchableFields)
         .sort()
@@ -26,7 +25,7 @@ const getProjects = async (query: Record<string, string>) => {
         .paginate();
 
     const [data, meta] = await Promise.all([
-        projectsData.build(),
+        queryBuilder.build(),
         queryBuilder.getMeta()
     ]);
 

@@ -31,7 +31,7 @@ export const createProjectZodSchema = z.object({
         .string("Project Start-Date must be string!")
         .min(10, "Invalid Start-Date!"),
     endDate: z
-        .string("Project Start-Date must be string!")
+        .string("Project End-Date must be string!")
         .min(7, "Invalid End-Date!")
         .optional(),
     technologies: z
@@ -80,7 +80,7 @@ export const updateProjectZodSchema = z.object({
         .min(10, "Invalid Start-Date!")
         .optional(),
     endDate: z
-        .string("Project Start-Date must be string!")
+        .string("Project End-Date must be string!")
         .min(7, "Invalid End-Date!")
         .optional(),
     technologies: z
