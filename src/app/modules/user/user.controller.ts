@@ -53,9 +53,21 @@ const getMe = catchAsync(async (req: Request, res: Response, next: NextFunction)
     });
 });
 
+const getAbout = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const result = await UserServices.getAboutService();
+
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "Your profile Retrieved Successfully!",
+        data: result.data
+    });
+});
+
 
 export const UserControllers = {
     // createUser,
     updateUser,
-    getMe
+    getMe,
+    getAbout
 };

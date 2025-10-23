@@ -41,5 +41,8 @@ export const updateUserZodSchema = z.object({
         .regex(/^(?=.*\d)/, {
             message: "Password must contain at least 1 number.",
         })
+        .optional(),
+    about: z
+        .object()
         .optional()
 });

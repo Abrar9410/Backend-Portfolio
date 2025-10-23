@@ -78,10 +78,19 @@ const getMeService = async (userId: string) => {
     };
 };
 
+const getAboutService = async () => {
+    const user = await Users.findOne({email: "admin@portfolio.com"});
+
+    return {
+        data: user?.about
+    };
+};
+
 
 export const UserServices = {
     // createUserService,
     updateUserService,
     // getAllUsersService,
-    getMeService
+    getMeService,
+    getAboutService
 };
